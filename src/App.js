@@ -12,7 +12,7 @@ export default class App extends Component {
       <div>
         {/* Hello My First Class based component {this.c} */}
         <Navbar/>
-        <News/>
+        <News pageSize={6} country="in" category="sports"/>
       </div>
     )
   }

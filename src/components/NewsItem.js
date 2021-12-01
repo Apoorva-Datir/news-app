@@ -7,19 +7,20 @@ import React, { Component } from "react";
 // import Typography from "@mui/material/Typography";
 
 export class NewsItem extends Component {
+  
   render() {
-    let { title, description } = this.props;
+    let { title, description, imageUrl,newsUrl } = this.props; //*This is destructuring
     return (
       <div>
         <div className="card" style={{width: "18rem"}}>
-          <img src="https://images.mktw.net/im-429485/social" className="card-img-top" alt="..." />
+          <img src={!imageUrl ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQsq1NacYKHKS-RudSBgbLZa_ndkD-lmmQfA&usqp=CAU" : imageUrl } className="card-img-top" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <p className="card-text">
-              {description}
+              {!description ? "Click on Read more to read the complete news article" : description}...
             </p>
-            <a href="/newsItem" className="btn btn-primary">
-              Go somewhere
+            <a rel="noreferrer" href={newsUrl} target="_blank" className="btn btn-sm btn-dark">
+              Read more
             </a>
           </div>
         </div>

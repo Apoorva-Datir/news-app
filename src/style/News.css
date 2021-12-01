@@ -1,9 +1,9 @@
 .news-wrapper {
   
   display: flex;
+  /* flex-direction: row; */
   flex-wrap: wrap;
 }
 .news-wrapper>* {
-  flex: 1 1 150px;
   margin: 10px;
 }
