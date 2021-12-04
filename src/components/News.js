@@ -70,19 +70,24 @@ export class News extends Component {
     category : PropTypes.string,
   }
 
-  constructor() {
-    super();
+  capitalizeFirstLetter=(string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  constructor(props) {
+    super(props);
     // console.log("Hello bitch");
     this.state = {
       articles: [], //initially articles is an empty array and we will fill it with the data from the api
       loading: false,
       page : 1
     };
+    document.title = `${this.capitalizeFirstLetter(this.props.category)} - News`;
   }
 
-  async componentDidMount() { // this runs after the component is rendered (it is lifecycle method) => 
-    // first constructor runs, then render() and then componentDidMount()
-    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=535db306bb5d49d99c0ccb9c42b7d31d&page=1&pageSize=${this.props.pageSize}`  //*pagesize means how many articles you want to show on each page => we will use pagesize to determine the no. of pages we need
+  //?this is a fucntion created because code is repeated in the componentDidMount() handlePrev and handlenext click methodmethod
+  async updateNews() {
+    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=535db306bb5d49d99c0ccb9c42b7d31d&page=${this.state.page}&pageSize=${this.props.pageSize}`  //*pagesize means how many articles you want to show on each page => we will use pagesize to determine the no. of pages we need
     this.setState({loading: true});
     let data = await fetch(url);
     let parsedData = await data.json(); //*this is a promise => it gets the data in json format
@@ -92,40 +97,58 @@ export class News extends Component {
       totalResults : parsedData.totalResults,
       loading: false,
     })
+  }
 
+  async componentDidMount() { // *this runs after the component is rendered (it is lifecycle method) => 
+    // first constructor runs, then render() and then componentDidMount()
+    // let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=535db306bb5d49d99c0ccb9c42b7d31d&page=1&pageSize=${this.props.pageSize}`  //*pagesize means how many articles you want to show on each page => we will use pagesize to determine the no. of pages we need
+    // this.setState({loading: true});
+    // let data = await fetch(url);
+    // let parsedData = await data.json(); //*this is a promise => it gets the data in json format
+    // console.log(parsedData);
+    // this.setState({
+    //   articles: parsedData.articles,  //*this is a promise => it gets our articles in json format
+    //   totalResults : parsedData.totalResults,
+    //   loading: false,
+    // })
+    this.updateNews();
   }
   handlePrevClick = async() => {
-    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=535db306bb5d49d99c0ccb9c42b7d31d&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`
-    this.setState({loading: true});
-    let data = await fetch(url);
-    let parsedData = await data.json(); 
-    // console.log(parsedData);
-    this.setState({
-      page: this.state.page - 1,
-      articles: parsedData.articles, 
-      loading: false, 
-    })
+    // let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=535db306bb5d49d99c0ccb9c42b7d31d&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`
+    // this.setState({loading: true});
+    // let data = await fetch(url);
+    // let parsedData = await data.json(); 
+    
+    // this.setState({
+    //   page: this.state.page - 1,
+    //   articles: parsedData.articles, 
+    //   loading: false, 
+    // })
+    this.setState({page: this.state.page - 1});
+    this.updateNews();
   }
 
   handleNextClick = async() => {
-    if(!(this.state.page+1 > Math.ceil(this.state.totalResults/this.props.pageSize))){
-    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=535db306bb5d49d99c0ccb9c42b7d31d&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
-    this.setState({loading: true});
-    let data = await fetch(url);
-    let parsedData = await data.json(); 
-    // console.log(parsedData);
-    this.setState({
-      page: this.state.page + 1,
-      articles: parsedData.articles,  
-      loading: false,
-    })
+    // if(!(this.state.page+1 > Math.ceil(this.state.totalResults/this.props.pageSize))){
+    // let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=535db306bb5d49d99c0ccb9c42b7d31d&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+    // this.setState({loading: true});
+    // let data = await fetch(url);
+    // let parsedData = await data.json(); 
+    // // console.log(parsedData);
+    // this.setState({
+    //   page: this.state.page + 1,
+    //   articles: parsedData.articles,  
+    //   loading: false,
+    // })
+    this.setState({page: this.state.page + 1});
+    this.updateNews();
   }
-  }
+  
 
   render() {
     return (
       <div className="container my-3">
-        <h4 className="text-center my-3">News Items Today!</h4>
+        <h4 className="text-center my-3">Top {this.capitalizeFirstLetter(this.props.category)} Headlines </h4>
         {this.state.loading && <Spinner />}
         <div className="news-wrapper">
           {!this.state.loading && this.state.articles.map((element) => {
@@ -136,6 +159,9 @@ export class News extends Component {
                   description={element.description ? element.description.slice(0,88) : ""}
                   imageUrl={element.urlToImage}
                   newsUrl={element.url}
+                  author={element.author}
+                  date={element.publishedAt}
+                  source={element.source.name}
                 />
               </div>
             );
