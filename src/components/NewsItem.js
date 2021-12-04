@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-// import Card from "@mui/material/Card";
-// import CardActions from "@mui/material/CardActions";
-// import CardContent from "@mui/material/CardContent";
-// import CardMedia from "@mui/material/CardMedia";
-// import Button from "@mui/material/Button";
-// import Typography from "@mui/material/Typography";
+import "../style/NewsItem.css";
+
 
 export class NewsItem extends Component {
   render() {
@@ -13,10 +9,18 @@ export class NewsItem extends Component {
     return (
       <div>
         <div className="card" style={{ width: "18rem" }}>
-          <span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style={{zIndex:"1",left:"90%"}}>
-            {source}
-            <span class="visually-hidden">unread messages</span>
-          </span>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              position: "absolute",
+              right: "0",
+              opacity:'0.8'
+            }}
+          >
+            <span className="badge rounded-pill bg-danger">{source} </span>
+          </div>
+
           <img
             src={
               !imageUrl
@@ -34,7 +38,7 @@ export class NewsItem extends Component {
                 : description}
               ...
             </p>
-            <p class="card-text">
+            <p className="card-text">
               <small className="text-muted">
                 By {!author ? "Unknown" : author} on{" "}
                 {new Date(date).toGMTString()}{" "}
