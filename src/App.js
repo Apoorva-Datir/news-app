@@ -32,7 +32,7 @@ export default class App extends Component {
             {/* Top Loading Bar */}
             <LoadingBar color="#f11946" progress={this.state.progress} />
             <Routes>
-              <Route
+              {/* <Route
                 exact
                 path="/home"
                 element={
@@ -45,7 +45,7 @@ export default class App extends Component {
                     category="general"
                   />
                 }
-              />
+              /> */}
               <Route
                 exact
                 path="/entertainment"

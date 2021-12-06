@@ -186,10 +186,10 @@ export class News extends Component {
               return (
                 <div className="nitems-wrap" key={element.url}>
                   <NewsItem
-                    title={element.title ? element.title.slice(0, 44) : ""} //*here we used ternary operator because if the title is null then we will get an error so we are setting the title such that when it is null we'll return an empty string so we get no error
+                    title={element.title ? element.title : ""} //*here we used ternary operator because if the title is null then we will get an error so we are setting the title such that when it is null we'll return an empty string so we get no error
                     description={
                       element.description
-                        ? element.description.slice(0, 88)
+                        ? element.description
                         : ""
                     }
                     imageUrl={element.urlToImage}

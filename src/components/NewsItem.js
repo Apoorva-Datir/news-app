@@ -1,6 +1,6 @@
+
 import React, { Component } from "react";
 import "../style/NewsItem.css";
-
 
 export class NewsItem extends Component {
   render() {
@@ -8,19 +8,8 @@ export class NewsItem extends Component {
       this.props; //*This is destructuring
     return (
       <div>
-        <div className="card" style={{ width: "18rem" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              position: "absolute",
-              right: "0",
-              opacity:'0.8'
-            }}
-          >
-            <span className="badge rounded-pill bg-danger">{source} </span>
-          </div>
-
+        <div className="card" style={{ width: "18rem" , borderRadius:"10px",boxShadow:'0 2px 20px rgba(0, 0, 0, 0.2)',overflow:'hidden',margin:'10px',}}>
+         
           <img
             src={
               !imageUrl
@@ -31,6 +20,7 @@ export class NewsItem extends Component {
             alt="..."
           />
           <div className="card-body">
+            <span className="tag tag-purple">{source}</span>
             <h5 className="card-title">{title}</h5>
             <p className="card-text">
               {!description
@@ -38,17 +28,24 @@ export class NewsItem extends Component {
                 : description}
               ...
             </p>
-            <p className="card-text">
+            {/* <p className="card-text">
               <small className="text-muted">
                 By {!author ? "Unknown" : author} on{" "}
                 {new Date(date).toGMTString()}{" "}
               </small>
-            </p>
+            </p> */}
+            <div className="user">
+              <div className="user-info">
+                <p><b>By {!author ? "Unknown" : author}</b></p>
+                <small>Date : {new Date(date).toGMTString()}{" "}</small>
+              </div>
+            </div>
             <a
               rel="noreferrer"
               href={newsUrl}
               target="_blank"
               className="btn btn-sm btn-dark"
+              style={{ marginTop: "10px" }}
             >
               Read more
             </a>
