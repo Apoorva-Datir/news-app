@@ -1,11 +1,10 @@
 
-import React, { Component } from "react";
+import React from "react";
 import "../style/NewsItem.css";
 
-export class NewsItem extends Component {
-  render() {
-    let { title, description, imageUrl, newsUrl, author, date, source } =
-      this.props; //*This is destructuring
+function NewsItem(props) {
+  
+    let { title, description, imageUrl, newsUrl, author, date, source } = props; //*This is destructuring
     return (
       <div>
         <div className="card" style={{ width: "18rem" , borderRadius:"10px",boxShadow:'0 2px 20px rgba(0, 0, 0, 0.2)',overflow:'hidden',margin:'10px',}}>
@@ -53,7 +52,7 @@ export class NewsItem extends Component {
         </div>
       </div>
     );
-  }
+  
 }
 
 export default NewsItem;
