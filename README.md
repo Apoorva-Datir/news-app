@@ -1,5 +1,5 @@
 # News App 📰
-## 📍 It is a user-friendly news app with trending news content in different categories🙌
+ 📍 It is a user-friendly news app with trending news content in different categories.
 
 
 <br>
