@@ -27,12 +27,7 @@ function NewsItem(props) {
                 : description}
               ...
             </p>
-            {/* <p className="card-text">
-              <small className="text-muted">
-                By {!author ? "Unknown" : author} on{" "}
-                {new Date(date).toGMTString()}{" "}
-              </small>
-            </p> */}
+            
             <div className="user">
               <div className="user-info">
                 <p><b>By {!author ? "Unknown" : author}</b></p>

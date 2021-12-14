@@ -14,7 +14,7 @@ function News(props) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  //?this is a fucntion created because code is repeated in the componentDidMount() handlePrev and handlenext click methodmethod
+  
   const updateNews = async () => {
     props.setProgress(20);
     let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`; //*pagesize means how many articles you want to show on each page => we will use pagesize to determine the no. of pages we need
@@ -36,37 +36,7 @@ function News(props) {
     //eslint-disable-next-line
   }, []);
 
-  //*next and prev are deleted so no need for these functions
-  // handlePrevClick = async() => {
-  //   // let url=`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=535db306bb5d49d99c0ccb9c42b7d31d&page=${this.state.page - 1}&pageSize=${props.pageSize}`
-  //   // this.setState({loading: true});
-  //   // let data = await fetch(url);
-  //   // let parsedData = await data.json();
-
-  //   // this.setState({
-  //   //   page: this.state.page - 1,
-  //   //   articles: parsedData.articles,
-  //   //   loading: false,
-  //   // })
-  //   this.setState({page: this.state.page - 1});
-  //   this.updateNews();
-  // }
-
-  // handleNextClick = async() => {
-  //   // if(!(this.state.page+1 > Math.ceil(this.state.totalResults/props.pageSize))){
-  //   // let url=`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=535db306bb5d49d99c0ccb9c42b7d31d&page=${this.state.page + 1}&pageSize=${props.pageSize}`;
-  //   // this.setState({loading: true});
-  //   // let data = await fetch(url);
-  //   // let parsedData = await data.json();
-  //   // // console.log(parsedData);
-  //   // this.setState({
-  //   //   page: this.state.page + 1,
-  //   //   articles: parsedData.articles,
-  //   //   loading: false,
-  //   // })
-  //   this.setState({page: this.state.page + 1});
-  //   this.updateNews();
-  // }
+ 
   // *Fetch function to fetch mode data on infinite scroll
   const fetchMoreData = async () => {
     let url = `https://newsapi.org/v2/top-headlines?country=${
@@ -74,11 +44,11 @@ function News(props) {
     }&category=${props.category}&apiKey=${props.apiKey}&page=${
       page + 1
     }&pageSize=${props.pageSize}`; //*pagesize means how many articles you want to show on each page => we will use pagesize to determine the no. of pages we need
-    // this.setState({ loading: true });
+    
     setPage(page + 1);
     let data = await fetch(url);
     let parsedData = await data.json(); //*this is a promise => it gets the data in json format
-    // console.log(parsedData);
+    
     setArticles(articles.concat(parsedData.articles));
     setTotalResults(parsedData.totalResults);
   };
@@ -97,7 +67,7 @@ function News(props) {
         loader={<Spinner />}
       >
         <div className="news-wrapper">
-          {/* {!this.state.loading && this.state.articles.map((element) => { */}
+        
 
           {articles.map((element) => {
             return (
@@ -116,11 +86,8 @@ function News(props) {
           })}
         </div>
       </InfiniteScroll>
-      {/* <div class="container d-flex justify-content-between">
-          <button disabled={this.state.page<=1} type="button" className="btn btn-info" onClick={this.handlePrevClick}>&larr; Previous</button>
-          <button disabled={this.state.page+1 > Math.ceil(this.state.totalResults/props.pageSize)} type="button" className="btn btn-danger" onClick={this.handleNextClick}>Next &rarr;</button>
-        </div> */}
-      {/* //*we dont need this above div because we deleted next and prev */}
+      
+      
     </div>
   );
 }

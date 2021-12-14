@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; //!In
 function App() {
   // c="Apoorva";
   const pageSize = 12;
-  const apiKey = process.env.REACT_APP_NEWS_API; //to hide API key => //*.env.local is in gitignore so others cant access it
+  const apiKey = process.env.REACT_APP_NEWS_API; //to hide API key 
   const [progress, setProgress] = useState(0);
   
   
@@ -18,32 +18,16 @@ function App() {
   
     return (
       <div>
-        {/* Hello My First Class based component {this.c} */}
-        {/* even after using router, our news component don't get mounted agin and again even if we switch between different categories
-        so we have to give then a uniwue key prop so that react knows that this is a unique value and we have to remount or
-        change the news component to show category wise news */}
+       
         <Router>
           <Fragment>
-            {" "}
-            {/* Fragments are basically used to return multiple elements, you can also use short syntax like <> </> opening and closing brackets insted of using fragmnts   */}
+          
+           
             <Navbar />
             {/* Top Loading Bar */}
             <LoadingBar color="#f11946" progress={progress} />
             <Routes>
-              {/* <Route
-                exact
-                path="/home"
-                element={
-                  <News
-                    setProgress={this.setProgress}
-                    apiKey={this.apiKey}
-                    key="general"
-                    pageSize={this.pageSize}
-                    country="in"
-                    category="general"
-                  />
-                }
-              /> */}
+             
               <Route
                 exact
                 path="/entertainment"
